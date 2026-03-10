@@ -1,0 +1,126 @@
+:root {
+    --blau-miku: #7ad5fc;
+    --rosa-miku: #ff8cbe;
+    --groc-pastel: #ffdf6c;
+    --fons-fosc: #c6b8eb;
+    --blanc-translucid: rgba(255, 255, 255, 0.9);
+    
+    --mida-tauler: 300px;
+    --mida-casella: 100px; /* 300 / 3 */
+}
+
+body {
+    background: linear-gradient(135deg, var(--blau-miku) 0%, var(--rosa-miku) 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.contenidor-joc {
+    background-color: var(--blanc-translucid);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border: 4px solid white;
+}
+
+h1 {
+    color: var(--blau-miku);
+    text-shadow: 2px 2px 0px var(--groc-pastel);
+    margin-top: 0;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+.tauler-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+.marcador {
+    background: var(--groc-pastel);
+    padding: 8px 15px;
+    border-radius: 15px;
+    color: #444;
+}
+
+button {
+    background-color: var(--rosa-miku);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 0px #e06aa2;
+}
+
+button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #e06aa2;
+}
+
+/* El tauler és de posició relativa per moure les fitxes amb absolut a dins */
+#tauler-puzle {
+    width: var(--mida-tauler);
+    height: var(--mida-tauler);
+    position: relative;
+    background-color: #e0dced; /* Color de la casella buida */
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 2px solid var(--fons-fosc);
+}
+
+.casella {
+    width: var(--mida-casella);
+    height: var(--mida-casella);
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Animació suau segons el requisit de l'exercici */
+    transition: transform 0.3s ease-in-out; 
+    
+    /* Configura la imatge de fons. RECORDA: el nom de l'arxiu ha de coincidir */
+    background-image: url('imatges/desenfoque\ y\ logo.png');
+    background-size: var(--mida-tauler) var(--mida-tauler);
+    
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.casella:hover {
+    filter: brightness(1.1);
+}
+
+#missatge-resolt {
+    margin-top: 20px;
+    padding: 15px;
+    background-color:var(--groc-pastel);
+    color: black;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #c3e6cb;
+    animation: saltar 0.5s ease-in-out;
+}
+
+.ocult {
+    display: none;
+}
+
+@keyframes saltar {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}

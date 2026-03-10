@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Puzzle - Hatsune Miku</title>
+    <link rel="stylesheet" href="estils.css">
+</head>
+<body>
+
+    <div class="contenidor-joc">
+        <h1>Sliding Puzzle</h1>
+        
+        <div class="tauler-info">
+            <span class="marcador">Moviments: <span id="comptador">0</span></span>
+            <button id="btn-reset">Reset / Barrejar</button>
+        </div>
+
+        <div id="tauler-puzle">
+            </div>
+
+        <div id="missatge-resolt" class="ocult">
+             You win!! with <span id="moviments-finals"></span> moviments. 
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
