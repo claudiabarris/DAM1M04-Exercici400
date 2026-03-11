@@ -13,7 +13,8 @@ let tauler = [
 ];
 
 let moviments = 0;
-const midaCasella = 100; // Mida en píxels (300/3)
+// ¡AQUÍ ESTÁ LA CLAVE! Ahora las piezas se mueven y se recortan de 150 en 150 píxeles
+const midaCasella = 150; 
 let jugant = true;
 
 // Inicialització al carregar
@@ -38,9 +39,10 @@ function crearPecesDOM() {
         // Calculem quina part de la imatge de fons li toca a cada peça
         let filaOrig = Math.floor((i - 1) / 3);
         let colOrig = (i - 1) % 3;
+        // Ajustamos la posición del fondo usando los nuevos 150px
         div.style.backgroundPosition = `-${colOrig * midaCasella}px -${filaOrig * midaCasella}px`;
         
-        // Esdeveniment de clic (passem el valor de la peça en comptes de coordenades fixes per poder-la buscar)
+        // Esdeveniment de clic 
         div.addEventListener("click", () => clicPeça(i));
         
         contenidor.appendChild(div);
@@ -125,7 +127,7 @@ function actualitzarDOM() {
             let valor = tauler[f][c];
             if (valor !== 0) {
                 let div = document.getElementById(`peca-${valor}`);
-                // Movem el div amb transform (suau gràcies al CSS)
+                // Movem el div amb transform (ara de 150 en 150px)
                 div.style.transform = `translate(${c * midaCasella}px, ${f * midaCasella}px)`;
             }
         }

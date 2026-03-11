@@ -1,126 +1,193 @@
 :root {
-    --blau-miku: #7ad5fc;
+    /* Paleta de colores Miku */
+    --blau-miku: #68c4ed;
     --rosa-miku: #ff8cbe;
-    --groc-pastel: #ffdf6c;
+    --groc-pastel: #fcebaf;
     --fons-fosc: #c6b8eb;
-    --blanc-translucid: rgba(255, 255, 255, 0.9);
     
-    --mida-tauler: 300px;
-    --mida-casella: 100px; /* 300 / 3 */
+    /* Variables de estilo */
+    --color-text: #222222;
+    --blanc-translucid: rgba(255, 255, 255, 0.65); 
+    
+    /* ¡AQUÍ ESTÁ LA MAGIA DEL TAMAÑO! */
+    --mida-tauler: 450px; /* Antes 300px */
+    --mida-casella: 150px; /* Antes 100px (450 / 3) */
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: var(--color-text);
     background: linear-gradient(135deg, var(--blau-miku) 0%, var(--rosa-miku) 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    font-family: 'Quicksand', sans-serif; 
 }
 
+/* CONTENEDOR PRINCIPAL - Más ancho y con más margen interior */
 .contenidor-joc {
     background-color: var(--blanc-translucid);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    padding: 50px; /* Más espacio interior */
+    border-radius: 40px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     text-align: center;
-    border: 4px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    width: 90%;
+    max-width: 650px; /* Antes 500px */
 }
 
+/* TÍTULOS - Letra más grande */
 h1 {
-    color: var(--blau-miku);
-    text-shadow: 2px 2px 0px var(--groc-pastel);
+    font-size: 65px; /* Antes 50px */
+    font-weight: 700;
     margin-top: 0;
-    font-size: 2.5em;
-    letter-spacing: 2px;
+    margin-bottom: 30px;
+    color: var(--blau-miku);
+    text-shadow: 3px 3px 0px white, 5px 5px 0px var(--groc-pastel);
+    letter-spacing: -1px;
 }
 
+/* PANEL DE INFORMACIÓN */
 .tauler-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #555;
+    margin-bottom: 35px;
+    width: 100%;
 }
 
 .marcador {
-    background: var(--groc-pastel);
-    padding: 8px 15px;
-    border-radius: 15px;
+    font-weight: 700;
+    font-size: 22px; /* Antes 18px */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 12px 25px;
+    border-radius: 30px; 
+    border: 3px solid var(--blau-miku);
     color: #444;
 }
 
+/* BOTÓN - Más grande y gordito */
 button {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
     background-color: var(--rosa-miku);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 1em;
-    font-weight: bold;
+    padding: 15px 35px; /* Más padding */
+    border-radius: 50px; 
+    font-size: 22px; /* Antes 18px */
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 4px 0px #e06aa2;
+    box-shadow: 0 4px 15px rgba(255, 140, 190, 0.4);
+    transition: background-color 0.4s ease-in-out, letter-spacing 0.4s ease-out, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0px #e06aa2;
+    background-color: #ff6f88;
+    transform: translateY(-3px);
+    letter-spacing: 4px; 
+    box-shadow: 0 6px 20px rgba(255, 140, 190, 0.6);
 }
 
-/* El tauler és de posició relativa per moure les fitxes amb absolut a dins */
+/* EL TAULER DEL PUZLE */
 #tauler-puzle {
     width: var(--mida-tauler);
     height: var(--mida-tauler);
     position: relative;
-    background-color: #e0dced; /* Color de la casella buida */
-    border-radius: 10px;
+    background-color: rgba(252, 235, 175, 0.6); 
+    border-radius: 25px; 
     overflow: hidden;
     margin: 0 auto;
-    border: 2px solid var(--fons-fosc);
+    border: 5px solid white;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
 }
 
+/* LES PECES */
 .casella {
     width: var(--mida-casella);
     height: var(--mida-casella);
     position: absolute;
     top: 0;
     left: 0;
-    /* Animació suau segons el requisit de l'exercici */
     transition: transform 0.3s ease-in-out; 
     
-    /* Configura la imatge de fons. RECORDA: el nom de l'arxiu ha de coincidir */
-    background-image: url('imatges/desenfoque\ y\ logo.png');
+    background-image: url(imatges/desenfoque\ y\ logo.png);
     background-size: var(--mida-tauler) var(--mida-tauler);
     
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 6px; 
 }
 
 .casella:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.15);
+    z-index: 10;
+    border: 2px solid white;
 }
 
+/* MENSAJE DE VICTORIA */
 #missatge-resolt {
-    margin-top: 20px;
-    padding: 15px;
-    background-color:var(--groc-pastel);
-    color: black;
-    border-radius: 10px;
-    font-weight: bold;
-    border: 2px solid #c3e6cb;
-    animation: saltar 0.5s ease-in-out;
+    margin-top: 35px;
+    padding: 20px;
+    background-color: var(--groc-pastel);
+    color: #5a4b31;
+    border-radius: 25px; 
+    font-size: 22px; /* Antes 18px */
+    font-weight: 700;
+    border: 4px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    animation: moveUp 0.6s ease-out forwards;
 }
 
 .ocult {
-    display: none;
+    display: none !important;
 }
 
-@keyframes saltar {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes moveUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ESTILOS PARA MÓVILES */
+@media (max-width: 768px) {
+    .contenidor-joc {
+        width: 95%;
+        padding: 30px 15px;
+        border-radius: 30px;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+
+    .tauler-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    /* En móviles muy pequeños, reducimos el tablero mediante escala para que no se salga de la pantalla sin romper la lógica del JS */
+    #tauler-puzle {
+        transform: scale(0.8);
+        transform-origin: top center;
+        margin-bottom: -90px; /* Compensa el espacio vacío que deja el scale */
+    }
 }
